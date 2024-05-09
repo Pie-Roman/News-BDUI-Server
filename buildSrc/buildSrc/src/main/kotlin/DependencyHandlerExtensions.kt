@@ -30,7 +30,7 @@ fun DependencyHandler.useCommonFeatureLibraries() {
 }
 
 fun DependencyHandler.useCommonFeatureModules() {
-
+    useModule(ProjectModules.Common.view)
 }
 
 @Suppress("UNCHECKED_CAST")

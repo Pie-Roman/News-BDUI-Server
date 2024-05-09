@@ -12,9 +12,6 @@ java {
 }
 
 dependencies {
-    useCommonFeatureLibraries()
-    useCommonFeatureModules()
-
+    useCommonLibraries()
     useModule(ProjectModules.Domain.articleDomain)
-    useModule(ProjectModules.Data.articleData)
 }

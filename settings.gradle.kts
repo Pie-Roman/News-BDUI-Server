@@ -1,5 +1,7 @@
 rootProject.name = "News-BDUI-Server"
 
+include(":common:view")
+
 pluginManagement {
     repositories {
         mavenCentral()

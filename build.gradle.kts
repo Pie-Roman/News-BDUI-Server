@@ -7,7 +7,7 @@ plugins {
     kotlinSpring
 }
 
-group = "ru.pyroman.laza"
+group = "ru.pyroman.news"
 version = "0.0.1-SNAPSHOT"
 
 java {

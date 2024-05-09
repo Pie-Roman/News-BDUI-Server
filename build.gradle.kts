@@ -1,22 +1,29 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlinJvm
+    springFrameworkBoot
+    springDependencyManagement
+    kotlinSpring
 }
 
-group = "ru.pyroman"
-version = "1.0-SNAPSHOT"
+group = "ru.pyroman.news"
+version = "0.0.1-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
+    useCommonLibraries()
 }
 
-tasks.test {
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(8)
 }

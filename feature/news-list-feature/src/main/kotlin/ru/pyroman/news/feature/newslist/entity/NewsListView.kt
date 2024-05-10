@@ -84,7 +84,7 @@ internal class NewsListView(
         return gallery(
             orientation = vertical,
             width = matchParentSize(),
-            height = wrapContentSize(),
+            height = matchParentSize(),
             items = vo.items.map { newsVo ->
                 newsCard(vo = newsVo)
             },

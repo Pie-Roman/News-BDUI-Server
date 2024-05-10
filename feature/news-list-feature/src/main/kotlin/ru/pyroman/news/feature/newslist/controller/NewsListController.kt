@@ -10,7 +10,7 @@ class NewsListController(
     private val service: NewsListService,
 ) {
 
-    @GetMapping("/newsList")
+    @GetMapping("/news-list")
     fun getViewData(): ViewData {
         return service.getView().getData()
     }

@@ -9,7 +9,7 @@ internal class ArticleDataSource {
 
     fun getArticles(request: ArticlesRequest): ArticleListDto {
         val uriBuilder = DefaultUriBuilderFactory(
-            "https://newsapi.org/v2",
+            "https://newsapi.org/v2/everything",
         ).builder()
 
         val uri = uriBuilder

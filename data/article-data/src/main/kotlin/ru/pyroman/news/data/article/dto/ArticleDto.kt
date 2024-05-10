@@ -1,14 +1,11 @@
 package ru.pyroman.news.data.article.dto
 
-import java.time.LocalDateTime
-
 internal class ArticleDto(
-    val source: ArticleSourceDto?,
-    val author: String?,
+    val article_id: String?,
     val title: String?,
+    val creator: List<String?>?,
     val description: String?,
-    val url: String?,
-    val urlToImage: String?,
-    val publishedAt: LocalDateTime?,
-    val content: String?,
+    val pubDate: String?,
+    val image_url: String?,
+    val category: List<String?>?,
 )

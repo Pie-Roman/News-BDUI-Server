@@ -29,15 +29,27 @@ internal class NewsListView(
 
     private fun DivScope.newsList(vo: NewsListVo): Div {
         return container(
+            width = matchParentSize(),
+            height = matchParentSize(),
+            paddings = edgeInsets(
+                left = 16,
+                right = 16,
+            ),
+            background = listOf(solidBackground(color = color("#FFFFFF"))),
+            items = listOf(
+                newsGallery(vo)
+            ),
+        )
+    }
+
+    private fun DivScope.newsGallery(vo: NewsListVo): Div {
+        return gallery(
             orientation = vertical,
             width = matchParentSize(),
             height = wrapContentSize(),
             items = vo.items.map { newsVo ->
                 newsCard(vo = newsVo)
             },
-            separator = containerSeparator(
-
-            ),
         )
     }
 
@@ -45,29 +57,55 @@ internal class NewsListView(
         return container(
             width = matchParentSize(),
             height = wrapContentSize(),
-            orientation = horizontal,
+            orientation = vertical,
             items = listOf(
-                image(
-                    width = wrapContentSize(),
+                container(
+                    width = matchParentSize(),
                     height = wrapContentSize(),
-                    imageUrl = vo.imageUrl,
-                    alignmentHorizontal = left,
+                    orientation = horizontal,
+                    items = listOf(
+                        image(
+                            width = fixedSize(128),
+                            height = fixedSize(128),
+                            imageUrl = vo.imageUrl,
+                            alignmentHorizontal = left,
+                        ),
+                        newsCardInfo(vo = vo) + containerProps(
+                            alignmentHorizontal = right,
+                        )
+                    ),
                 ),
-                newsCardInfo(vo = vo) + containerProps(
-                    alignmentHorizontal = right,
-                )
+                separator(
+                    width = matchParentSize(),
+                    height = fixedSize(1),
+                    background = listOf(solidBackground(color = color("#EEEEEE"))),
+                    margins = edgeInsets(
+                        top = 32,
+                        bottom = 20,
+                    ),
+                ),
             ),
         )
     }
 
     private fun DivScope.newsCardInfo(vo: NewsCardVo): Container {
         return container(
-            orientation = vertical,
+            orientation = overlap,
+            margins = edgeInsets(
+                left = 10,
+                right = 10,
+            ),
             items = listOf(
                 text(
                     text = vo.title,
+                    fontSize = 14,
+                    fontWeight = bold,
+                    lineHeight = 20,
+                    letterSpacing = 0.0,
+                    textColor = color("#180E19"),
+                    alignmentVertical = top,
+                    alignmentHorizontal = left,
                 ),
-
             )
         )
     }

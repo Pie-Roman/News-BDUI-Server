@@ -20,9 +20,9 @@ internal class NewsListFormatter {
 
     private fun format(article: Article): NewsCardVo {
         val title = article.title
-        val author = article.author
+        val creator = article.creator.firstOrNull()
         val publishDate = ""
-        val imageUrl = article.urlToImage?.let { urlString ->
+        val imageUrl = article.imageUrl?.let { urlString ->
             try {
                 Url.create(urlString)
             } catch (error: Throwable) {
@@ -32,9 +32,9 @@ internal class NewsListFormatter {
 
         return NewsCardVo(
             title = title,
-            author = author,
-            publishDate = publishDate,
+            creator = creator,
             imageUrl = imageUrl,
+            publishDate = publishDate,
         )
     }
 }

@@ -1,14 +1,11 @@
 package ru.pyroman.news.domain.article.model
 
-import java.time.LocalDateTime
-
 data class Article(
-    val source: ArticleSource?,
-    val author: String?,
+    val id: String,
     val title: String,
+    val creator: List<String>,
     val description: String,
-    val url: String?,
-    val urlToImage: String?,
-    val publishedAt: LocalDateTime?,
-    val content: String,
+    val pubDate: String?,
+    val imageUrl: String?,
+    val category: List<String>,
 )

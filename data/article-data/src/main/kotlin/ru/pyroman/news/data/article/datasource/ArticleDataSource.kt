@@ -9,13 +9,11 @@ internal class ArticleDataSource {
 
     fun getArticles(request: ArticlesRequest): ArticleListDto {
         val uriBuilder = DefaultUriBuilderFactory(
-            "https://newsapi.org/v2/everything",
+            "https://newsdata.io/api/1/news",
         ).builder()
 
         val uri = uriBuilder
-            .queryParam("q", "apple")
-            .queryParam("sortBy", "popularity")
-            .queryParam("apiKey", "dc32a0db5f3d4d8fa0582922bcd8181c")
+            .queryParam("apiKey", "pub_438944bc52c063137c2b1a4448b34ca9eee9a")
             .build()
 
         val webClient = WebClient.builder().build()

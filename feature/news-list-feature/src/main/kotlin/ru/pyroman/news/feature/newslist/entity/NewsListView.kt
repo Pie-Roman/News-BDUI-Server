@@ -5,6 +5,8 @@ import divkit.dsl.scope.DivScope
 import ru.pyroman.news.common.view.View
 import ru.pyroman.news.common.view.ViewData
 import ru.pyroman.news.feature.newslist.NewsListConstants.NEWS_LIST_LAYOUT_ID
+import ru.pyroman.news.feature.newslist.NewsListConstants.NEWS_LOGO_IMAGE_URL
+import ru.pyroman.news.feature.newslist.NewsListConstants.NEWS_LOGO_TEXT
 
 internal class NewsListView(
     private val vo: NewsListVo,
@@ -31,14 +33,50 @@ internal class NewsListView(
         return container(
             width = matchParentSize(),
             height = matchParentSize(),
+            orientation = vertical,
             paddings = edgeInsets(
                 left = 16,
                 right = 16,
             ),
             background = listOf(solidBackground(color = color("#FFFFFF"))),
             items = listOf(
-                newsGallery(vo)
+                newsLogo() + containerProps(
+                    margins = edgeInsets(
+                        top = 30,
+                        bottom = 30,
+                    )
+                ),
+                newsGallery(vo),
             ),
+        )
+    }
+
+    private fun DivScope.newsLogo(): Container {
+        return row(
+            width = wrapContentSize(),
+            height = wrapContentSize(),
+            alignmentHorizontal = center,
+            contentAlignmentVertical = center,
+            items = listOf(
+                image(
+                    width = fixedSize(24),
+                    height = fixedSize(24),
+                    imageUrl = Url.create(NEWS_LOGO_IMAGE_URL),
+                    margins = edgeInsets(
+                        right = 10,
+                    )
+                ),
+                text(
+                    height = matchParentSize(),
+                    text = NEWS_LOGO_TEXT,
+                    textAlignmentVertical = center,
+                    fontSize = 15,
+                    lineHeight = 20,
+                    fontWeight = bold,
+                    letterSpacing = 0.0,
+                    textColor = color("#180E19"),
+                )
+            )
         )
     }
 
@@ -61,7 +99,7 @@ internal class NewsListView(
             items = listOf(
                 container(
                     width = matchParentSize(),
-                    height = wrapContentSize(),
+                    height = fixedSize(128),
                     orientation = horizontal,
                     items = listOf(
                         image(
@@ -90,23 +128,86 @@ internal class NewsListView(
 
     private fun DivScope.newsCardInfo(vo: NewsCardVo): Container {
         return container(
-            orientation = overlap,
+            height = matchParentSize(),
+            orientation = vertical,
+            contentAlignmentVertical = space_between,
             margins = edgeInsets(
                 left = 10,
                 right = 10,
             ),
             items = listOf(
-                text(
-                    text = vo.title,
-                    fontSize = 14,
-                    fontWeight = bold,
-                    lineHeight = 20,
-                    letterSpacing = 0.0,
-                    textColor = color("#180E19"),
-                    alignmentVertical = top,
+                column(
+                    items = listOfNotNull(
+                        text(
+                            text = vo.title,
+                            fontSize = 14,
+                            lineHeight = 20,
+                            fontWeight = bold,
+                            letterSpacing = 0.0,
+                            textColor = color("#180E19"),
+                            alignmentHorizontal = left,
+                            maxLines = 3,
+                            autoEllipsize = true,
+                        ),
+                        vo.creator?.let { creator ->
+                            text(
+                                text = creator,
+                                fontSize = 13,
+                                lineHeight = 22,
+                                fontWeight = bold,
+                                letterSpacing = 0.0,
+                                textColor = color("#909090"),
+                                margins = edgeInsets(
+                                    top = 8,
+                                )
+                            )
+                        },
+                    )
+                ),
+                newsCardInfoBottomBlock (vo) + containerProps(
                     alignmentHorizontal = left,
                 ),
             )
+        )
+    }
+
+    private fun DivScope.newsCardInfoBottomBlock(vo: NewsCardVo): Container {
+        return container(
+            width = wrapContentSize(),
+            height = wrapContentSize(),
+            orientation = horizontal,
+            contentAlignmentVertical = center,
+            items = buildList {
+                vo.category?.let { category ->
+                    add(
+                        text(
+                            text = category.text,
+                            textAlignmentVertical = center,
+                            fontSize = 13,
+                            fontWeight = bold,
+                            lineHeight = 22,
+                            letterSpacing = 0.0,
+                            textColor = color("#69BDFD"),
+                            margins = edgeInsets(
+                                right = 10,
+                            )
+                        )
+                    )
+                }
+                vo.publishDate?.let { publishDate ->
+                    add(
+                        text(
+                            text = publishDate,
+                            textAlignmentVertical = center,
+                            fontSize = 13,
+                            lineHeight = 22,
+                            fontWeight = bold,
+                            letterSpacing = 0.0,
+                            textColor = color("#909090"),
+                        )
+                    )
+                }
+            },
         )
     }
 }

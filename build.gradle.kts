@@ -16,6 +16,8 @@ java {
 
 dependencies {
     useCommonLibraries()
+
+    useModule(ProjectModules.Feature.newsListFeature)
 }
 
 tasks.withType<KotlinCompile> {

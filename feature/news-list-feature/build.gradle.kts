@@ -1,0 +1,20 @@
+plugins {
+    `kotlin-dsl`
+    kotlinJvm
+    springFrameworkBoot
+    springDependencyManagement
+    kotlinSpring
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    useCommonFeatureLibraries()
+    useCommonFeatureModules()
+
+    useModule(ProjectModules.Domain.articleDomain)
+    useModule(ProjectModules.Data.articleData)
+}

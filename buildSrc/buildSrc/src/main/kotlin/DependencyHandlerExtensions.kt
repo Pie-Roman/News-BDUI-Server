@@ -8,7 +8,10 @@ fun DependencyHandler.useModule(moduleNotation: String) {
 
 fun DependencyHandler.useCommonLibraries() {
     add(IMPLEMENTATION, Dependencies.SpringFramework.Boot.starterWeb) {
-        exclude(group = Dependencies.SpringFramework.Boot.group, module = "spring-boot-starter-logging")
+        excludeSpringLogging()
+    }
+    add(IMPLEMENTATION, Dependencies.SpringFramework.Boot.starterWebFlux)  {
+        excludeSpringLogging()
     }
 
     add(IMPLEMENTATION, Dependencies.Jackson.Module.kotlin)
@@ -30,11 +33,16 @@ fun DependencyHandler.useCommonFeatureLibraries() {
 }
 
 fun DependencyHandler.useCommonFeatureModules() {
+    useModule(ProjectModules.Common.view)
+}
 
+private fun <T : ModuleDependency> T.excludeSpringLogging() {
+    exclude(group = Dependencies.SpringFramework.Boot.group, module = "spring-boot-starter-logging")
+    exclude(group = "org.apache.logging.log4j", module = "log4j-to-slf4j")
 }
 
 @Suppress("UNCHECKED_CAST")
-fun <T : ModuleDependency> T.exclude(group: String? = null, module: String? = null): T =
+private fun <T : ModuleDependency> T.exclude(group: String? = null, module: String? = null): T =
     exclude(excludeMapFor(group, module)) as T
 
 private fun excludeMapFor(group: String?, module: String?): Map<String, String> =

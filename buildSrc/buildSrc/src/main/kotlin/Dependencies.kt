@@ -7,6 +7,7 @@ object Dependencies {
             private const val version = "3.1.2"
             const val group = "org.springframework.boot"
             const val starterWeb = "$group:spring-boot-starter-web:$version"
+            const val starterWebFlux = "$group:spring-boot-starter-webflux:$version"
 
             // test
             const val starterTest = "$group:spring-boot-starter-test:$version"

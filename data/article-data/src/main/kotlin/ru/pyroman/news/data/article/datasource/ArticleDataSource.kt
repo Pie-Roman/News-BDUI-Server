@@ -14,6 +14,7 @@ internal class ArticleDataSource {
 
         val uri = uriBuilder
             .queryParam("apiKey", "pub_438944bc52c063137c2b1a4448b34ca9eee9a")
+            .queryParam("country", "us")
             .build()
 
         val webClient = WebClient.builder().build()

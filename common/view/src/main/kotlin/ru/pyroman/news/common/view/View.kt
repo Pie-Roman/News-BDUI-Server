@@ -1,7 +1,6 @@
 package ru.pyroman.news.common.view
 
 import divkit.dsl.Div
-import divkit.dsl.DivanPatch
 import divkit.dsl.Patch
 import divkit.dsl.data
 import divkit.dsl.divan
@@ -18,14 +17,16 @@ abstract class View {
 
     open fun DivScope.patchChanges(): List<Patch.Change> = emptyList()
 
-    fun getPatch(): DivanPatch {
+    fun getPatchData(): ViewPatchData {
         val divanPatch = divanPatch {
             patch(
                 changes = patchChanges()
             )
         }
 
-        return divanPatch
+        return ViewPatchData.Factory.create(
+            divanPatch = divanPatch,
+        )
     }
 
     fun getData(): ViewData {

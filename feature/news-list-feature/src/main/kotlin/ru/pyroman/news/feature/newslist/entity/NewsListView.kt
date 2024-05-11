@@ -2,6 +2,7 @@ package ru.pyroman.news.feature.newslist.entity
 
 import divkit.dsl.Container
 import divkit.dsl.Div
+import divkit.dsl.Patch
 import divkit.dsl.Url
 import divkit.dsl.bold
 import divkit.dsl.center
@@ -16,6 +17,7 @@ import divkit.dsl.horizontal
 import divkit.dsl.image
 import divkit.dsl.left
 import divkit.dsl.matchParentSize
+import divkit.dsl.patchChange
 import divkit.dsl.right
 import divkit.dsl.row
 import divkit.dsl.scope.DivScope
@@ -38,6 +40,19 @@ internal class NewsListView(
     override fun DivScope.layout(): Div {
         return newsList(
             vo = vo,
+        )
+    }
+
+    override fun DivScope.patchChanges(): List<Patch.Change> {
+        return listOf(
+            patchChange(
+                id = "newsListTabLayout",
+                items = listOf(
+                    newsList(
+                        vo = vo,
+                    )
+                )
+            )
         )
     }
 

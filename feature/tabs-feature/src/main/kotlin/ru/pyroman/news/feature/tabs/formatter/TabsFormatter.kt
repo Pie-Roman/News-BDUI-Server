@@ -53,7 +53,7 @@ internal class TabsFormatter {
             id = TabsConstants.NEWS_LIST_TAB_LAYOUT_ID,
             stateId = TabsConstants.NEWS_LIST_TAB_STATE_ID,
             downloadActionId = TabsConstants.NEWS_LIST_TAB_VISIBILITY_ACTION_ID,
-            downloadUrl = Url.create(""),
+            downloadUrl = Url.create("patch/news-list"),
         )
     }
 }

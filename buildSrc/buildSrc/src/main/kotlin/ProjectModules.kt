@@ -8,6 +8,7 @@ object ProjectModules {
     object Feature {
         private const val feature = ":feature"
         const val newsListFeature = "$feature:news-list-feature"
+        const val tabsFeature = "$feature:tabs-feature"
     }
 
     object Domain {

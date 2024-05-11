@@ -49,11 +49,13 @@ internal class TabsFormatter {
     }
 
     private fun formatNewsListTabContainerState(): TabContainerStateVo {
+        val id = TabsConstants.NEWS_LIST_TAB_LAYOUT_ID
+
         return TabContainerStateVo(
-            id = TabsConstants.NEWS_LIST_TAB_LAYOUT_ID,
+            id = id,
             stateId = TabsConstants.NEWS_LIST_TAB_STATE_ID,
             downloadActionId = TabsConstants.NEWS_LIST_TAB_VISIBILITY_ACTION_ID,
-            downloadUrl = Url.create("patch/news-list"),
+            downloadUrl = Url.create("patch/news-list?id=$id"),
         )
     }
 }

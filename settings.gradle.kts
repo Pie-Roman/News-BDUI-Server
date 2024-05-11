@@ -3,6 +3,7 @@ rootProject.name = "News-BDUI-Server"
 include(":common:view")
 
 include(":feature:news-list-feature")
+include(":feature:tabs-feature")
 
 include(":domain:article-domain")
 

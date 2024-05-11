@@ -27,6 +27,7 @@ import divkit.dsl.stateItem
 import divkit.dsl.wrapContentSize
 import ru.pyroman.news.common.view.View
 import ru.pyroman.news.common.view.ViewData
+import ru.pyroman.news.common.view.utils.visibilityDownloadAction
 import ru.pyroman.news.feature.tabs.TabsConstants
 
 class TabsView(
@@ -54,6 +55,7 @@ class TabsView(
             height = matchParentSize(),
             orientation = overlap,
             items = listOf(
+                tabContainer(tabsVo = tabsVo),
                 tabsBar(tabsVo = tabsVo) + containerProps(
                     alignmentVertical = bottom,
                 )
@@ -74,23 +76,24 @@ class TabsView(
                 right = 16,
             ),
             items = tabsVo.tabs.map { tabVo ->
-                tabsBarItem(tabVo)
+                tabsBarItem(tabVo.tabBarItemVo)
             },
         )
     }
 
-    private fun DivScope.tabsBarItem(tabVo: TabVo): Div {
+    private fun DivScope.tabsBarItem(vo: TabBarItemVo): Div {
         return state(
+            id = vo.id,
             width = wrapContentSize(),
             height = wrapContentSize(),
             states = listOf(
                 stateItem(
-                    stateId = tabVo.selectedState.id,
-                    div = tabsBarItemImage(tabVo.selectedState.imageUrl)
+                    stateId = vo.selectedState.id,
+                    div = tabsBarItemImage(vo.selectedState.imageUrl)
                 ),
                 stateItem(
-                    stateId = tabVo.unselectedState.id,
-                    div = tabsBarItemImage(tabVo.unselectedState.imageUrl),
+                    stateId = vo.unselectedState.id,
+                    div = tabsBarItemImage(vo.unselectedState.imageUrl),
                 ),
             ),
         )
@@ -104,6 +107,33 @@ class TabsView(
             margins = edgeInsets(
                 all = 16,
             )
+        )
+    }
+
+    private fun DivScope.tabContainer(tabsVo: TabsVo): Div {
+        return state(
+            width = matchParentSize(),
+            height = matchParentSize(),
+            states = tabsVo.tabs.map { tabVo ->
+                stateItem(
+                    stateId = tabVo.tabContainerStateVo.stateId,
+                    div = tab(tabVo.tabContainerStateVo),
+                )
+            }
+        )
+    }
+
+    private fun DivScope.tab(tabContainerStateVo: TabContainerStateVo): Div {
+        return container(
+            width = matchParentSize(),
+            height = matchParentSize(),
+            id = tabContainerStateVo.id,
+            visibilityActions = listOf(
+                visibilityDownloadAction(
+                    logId = tabContainerStateVo.downloadActionId,
+                    url = tabContainerStateVo.downloadUrl,
+                )
+            ),
         )
     }
 }

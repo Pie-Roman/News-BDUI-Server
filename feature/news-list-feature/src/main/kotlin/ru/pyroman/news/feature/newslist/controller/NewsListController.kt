@@ -1,5 +1,6 @@
 package ru.pyroman.news.feature.newslist.controller
 
+import divkit.dsl.DivanPatch
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import ru.pyroman.news.common.view.ViewData
@@ -13,5 +14,10 @@ class NewsListController(
     @GetMapping("/news-list")
     fun getViewData(): ViewData {
         return service.getView().getData()
+    }
+
+    @GetMapping("/patch/news-list")
+    fun getPatch(): DivanPatch {
+        return service.getView().getPatch()
     }
 }

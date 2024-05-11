@@ -1,31 +1,43 @@
 package ru.pyroman.news.feature.newslist.entity
 
-import divkit.dsl.*
+import divkit.dsl.Container
+import divkit.dsl.Div
+import divkit.dsl.Url
+import divkit.dsl.bold
+import divkit.dsl.center
+import divkit.dsl.color
+import divkit.dsl.column
+import divkit.dsl.container
+import divkit.dsl.containerProps
+import divkit.dsl.edgeInsets
+import divkit.dsl.fixedSize
+import divkit.dsl.gallery
+import divkit.dsl.horizontal
+import divkit.dsl.image
+import divkit.dsl.left
+import divkit.dsl.matchParentSize
+import divkit.dsl.right
+import divkit.dsl.row
 import divkit.dsl.scope.DivScope
+import divkit.dsl.separator
+import divkit.dsl.solidBackground
+import divkit.dsl.space_between
+import divkit.dsl.text
+import divkit.dsl.vertical
+import divkit.dsl.wrapContentSize
 import ru.pyroman.news.common.view.View
-import ru.pyroman.news.common.view.ViewData
 import ru.pyroman.news.feature.newslist.NewsListConstants.NEWS_LIST_LAYOUT_ID
 import ru.pyroman.news.feature.newslist.NewsListConstants.NEWS_LOGO_IMAGE_URL
 import ru.pyroman.news.feature.newslist.NewsListConstants.NEWS_LOGO_TEXT
 
 internal class NewsListView(
     private val vo: NewsListVo,
-) : View {
-    override fun getData(): ViewData {
+) : View() {
 
-        val divan = divan {
-            data(
-                logId = NEWS_LIST_LAYOUT_ID,
-                states = singleRoot(
-                    div = newsList(
-                        vo = vo,
-                    )
-                )
-            )
-        }
-
-        return ViewData.Factory.create(
-            divan = divan,
+    override val layoutId = NEWS_LIST_LAYOUT_ID
+    override fun DivScope.layout(): Div {
+        return newsList(
+            vo = vo,
         )
     }
 

@@ -10,8 +10,6 @@ import divkit.dsl.center
 import divkit.dsl.color
 import divkit.dsl.container
 import divkit.dsl.containerProps
-import divkit.dsl.data
-import divkit.dsl.divan
 import divkit.dsl.edgeInsets
 import divkit.dsl.fixedSize
 import divkit.dsl.horizontal
@@ -19,33 +17,24 @@ import divkit.dsl.image
 import divkit.dsl.matchParentSize
 import divkit.dsl.overlap
 import divkit.dsl.scope.DivScope
-import divkit.dsl.singleRoot
 import divkit.dsl.solidBackground
 import divkit.dsl.space_between
 import divkit.dsl.state
 import divkit.dsl.stateItem
 import divkit.dsl.wrapContentSize
 import ru.pyroman.news.common.view.View
-import ru.pyroman.news.common.view.ViewData
 import ru.pyroman.news.common.view.utils.visibilityDownloadAction
 import ru.pyroman.news.feature.tabs.TabsConstants
 
 class TabsView(
     val vo: TabsVo,
-) : View {
+) : View() {
 
-    override fun getData(): ViewData {
-        val divan = divan {
-            data(
-                logId = TabsConstants.TABS_LAYOUT_ID,
-                states = singleRoot(
-                    tabsView(tabsVo = vo)
-                )
-            )
-        }
+    override val layoutId = TabsConstants.TABS_LAYOUT_ID
 
-        return ViewData.Factory.create(
-            divan = divan,
+    override fun DivScope.layout(): Div {
+        return tabsView(
+            tabsVo = vo,
         )
     }
 

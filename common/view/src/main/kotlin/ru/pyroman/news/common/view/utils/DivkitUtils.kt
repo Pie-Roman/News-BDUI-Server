@@ -48,10 +48,12 @@ fun DivScope.setVariableAction(
 fun DivScope.visibilityDownloadAction(
     logId: String,
     url: Url,
+    logLimit: Int? = 0,
 ): VisibilityAction {
     return visibilityAction(
         logId = logId,
         url = makeDownloadUrl(url),
+        logLimit = logLimit,
     )
 }
 

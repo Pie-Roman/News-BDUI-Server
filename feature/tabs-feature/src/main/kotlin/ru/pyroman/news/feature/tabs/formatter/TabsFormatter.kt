@@ -4,7 +4,7 @@ import divkit.dsl.Url
 import ru.pyroman.news.feature.tabs.TabsConstants
 import ru.pyroman.news.feature.tabs.entity.TabBarItemStateVo
 import ru.pyroman.news.feature.tabs.entity.TabBarItemVo
-import ru.pyroman.news.feature.tabs.entity.TabContainerStateVo
+import ru.pyroman.news.feature.tabs.entity.TabContainerVo
 import ru.pyroman.news.feature.tabs.entity.TabVo
 import ru.pyroman.news.feature.tabs.entity.TabsVo
 
@@ -29,7 +29,7 @@ internal class TabsFormatter {
         return TabVo(
             id = TabsConstants.NEWS_LIST_TAB_ID,
             tabBarItemVo = tabBarItemVo,
-            tabContainerStateVo = tabContainerStateVo,
+            tabContainerVo = tabContainerStateVo,
         )
     }
 
@@ -48,12 +48,11 @@ internal class TabsFormatter {
         )
     }
 
-    private fun formatNewsListTabContainerState(): TabContainerStateVo {
+    private fun formatNewsListTabContainerState(): TabContainerVo {
         val id = TabsConstants.NEWS_LIST_TAB_LAYOUT_ID
 
-        return TabContainerStateVo(
-            id = id,
-            stateId = TabsConstants.NEWS_LIST_TAB_STATE_ID,
+        return TabContainerVo(
+            layoutId = id,
             downloadActionId = TabsConstants.NEWS_LIST_TAB_VISIBILITY_ACTION_ID,
             downloadUrl = Url.create("patch/news-list?id=$id"),
         )
@@ -66,7 +65,7 @@ internal class TabsFormatter {
         return TabVo(
             id = TabsConstants.SEARCH_TAB_ID,
             tabBarItemVo = tabBarItemVo,
-            tabContainerStateVo = tabContainerStateVo,
+            tabContainerVo = tabContainerStateVo,
         )
     }
 
@@ -84,12 +83,11 @@ internal class TabsFormatter {
         )
     }
 
-    private fun formatSearchTabContainerState(): TabContainerStateVo {
+    private fun formatSearchTabContainerState(): TabContainerVo {
         val id = TabsConstants.SEARCH_TAB_LAYOUT_ID
 
-        return TabContainerStateVo(
-            id = id,
-            stateId = TabsConstants.SEARCH_TAB_STATE_ID,
+        return TabContainerVo(
+            layoutId = id,
             downloadActionId = TabsConstants.SEARCH_TAB_VISIBILITY_ACTION_ID,
             downloadUrl = Url.create("patch/search?id=$id"),
         )

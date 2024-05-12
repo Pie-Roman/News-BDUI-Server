@@ -130,52 +130,63 @@ class TabsView(
         return state(
             width = matchParentSize(),
             height = matchParentSize(),
+            stateIdVariable = SELECTED_TAB_ID_VARIABLE_NAME,
             states = tabsVo.tabs.map { tabVo ->
                 stateItem(
-                    stateId = tabVo.tabContainerStateVo.stateId,
-                    div = tab(tabVo.tabContainerStateVo),
+                    stateId = tabVo.id,
+                    div = tab(tabVo.tabContainerVo),
                 )
             },
         )
     }
 
-    private fun DivScope.tab(tabContainerStateVo: TabContainerStateVo): Div {
+    private fun DivScope.tab(tabContainerVo: TabContainerVo): Div {
         return container(
             width = matchParentSize(),
             height = matchParentSize(),
-            id = tabContainerStateVo.id,
+            id = tabContainerVo.layoutId,
             visibilityActions = listOf(
                 visibilityDownloadAction(
-                    logId = tabContainerStateVo.downloadActionId,
-                    url = tabContainerStateVo.downloadUrl,
+                    logId = tabContainerVo.downloadActionId,
+                    url = tabContainerVo.downloadUrl,
                 )
             ),
         )
     }
 
     private fun DivScope.switchTabActions(newTabId: String): List<Action> {
+        return buildList {
+            addAll(switchTabBarItemActions(newTabId))
+            add(setTabIdAction(newTabId))
+        }
+    }
+
+    private fun DivScope.switchTabBarItemActions(newTabId: String): List<Action> {
         return listOf(
-            unselectTabAction(),
-            setVariableAction(
-                logId = "$SELECTED_TAB_ID_VARIABLE_NAME$newTabId",
-                variableName = SELECTED_TAB_ID_VARIABLE_NAME,
-                value = newTabId,
-            ),
-            selectTabStateAction(newTabId),
+            unselectTabBarItemAction(),
+            selectTabBarItemStateAction(newTabId),
         )
     }
 
-    private fun DivScope.unselectTabAction(): Action {
+    private fun DivScope.setTabIdAction(newTabId: String): Action {
+        return setVariableAction(
+            logId = "$SELECTED_TAB_ID_VARIABLE_NAME$newTabId",
+            variableName = SELECTED_TAB_ID_VARIABLE_NAME,
+            value = newTabId,
+        )
+    }
+
+    private fun DivScope.unselectTabBarItemAction(): Action {
         return setStateActionWithExpression(
-            logId = "${SELECTED_TAB_ID_VARIABLE_NAME}_unselect_state",
+            logId = "${SELECTED_TAB_ID_VARIABLE_NAME}_tab_bar_item_state_unselect",
             stateId = "@{$SELECTED_TAB_ID_VARIABLE_NAME}".tabBarItemStateId,
             stateItemId = "@{$SELECTED_TAB_ID_VARIABLE_NAME}".tabBarItemUnselectedStateId,
         )
     }
 
-    private fun DivScope.selectTabStateAction(tabId: String): Action {
+    private fun DivScope.selectTabBarItemStateAction(tabId: String): Action {
         return setStateAction(
-            logId = "${tabId}_select_state",
+            logId = "${tabId}_tab_bar_item_state_select",
             stateId = tabId.tabBarItemStateId,
             stateItemId = tabId.tabBarItemSelectedStateId,
         )

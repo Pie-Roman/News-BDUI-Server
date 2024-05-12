@@ -13,6 +13,7 @@ internal class TabsFormatter {
     fun format(): TabsVo {
         val tabs = buildList {
             add(formatNewsListTab())
+            add(formatSearchTab())
         }
 
         return TabsVo(
@@ -56,6 +57,44 @@ internal class TabsFormatter {
             stateId = TabsConstants.NEWS_LIST_TAB_STATE_ID,
             downloadActionId = TabsConstants.NEWS_LIST_TAB_VISIBILITY_ACTION_ID,
             downloadUrl = Url.create("patch/news-list?id=$id"),
+        )
+    }
+
+    private fun formatSearchTab(): TabVo {
+        val tabBarItemVo = formatSearchTabBarItem()
+        val tabContainerStateVo = formatSearchTabContainerState()
+
+        return TabVo(
+            tabBarItemVo = tabBarItemVo,
+            tabContainerStateVo = tabContainerStateVo,
+        )
+    }
+
+    private fun formatSearchTabBarItem(): TabBarItemVo {
+        val selectedState = TabBarItemStateVo(
+            id = TabsConstants.SEARCH_TAB_BAR_ITEM_SELECTED_STATE_ID,
+            imageUrl = Url.create(TabsConstants.SEARCH_TAB_BAR_ITEM_SELECTED_IMAGE_URL),
+        )
+        val unselectedState = TabBarItemStateVo(
+            id = TabsConstants.SEARCH_TAB_BAR_ITEM_UNSELECTED_STATE_ID,
+            imageUrl = Url.create(TabsConstants.SEARCH_TAB_BAR_ITEM_UNSELECTED_IMAGE_URL),
+        )
+
+        return TabBarItemVo(
+            id = TabsConstants.SEARCH_TAB_BAR_ITEM_STATE_ID,
+            selectedState = selectedState,
+            unselectedState = unselectedState,
+        )
+    }
+
+    private fun formatSearchTabContainerState(): TabContainerStateVo {
+        val id = TabsConstants.SEARCH_TAB_LAYOUT_ID
+
+        return TabContainerStateVo(
+            id = id,
+            stateId = TabsConstants.SEARCH_TAB_STATE_ID,
+            downloadActionId = TabsConstants.SEARCH_TAB_VISIBILITY_ACTION_ID,
+            downloadUrl = Url.create("patch/search?id=$id"),
         )
     }
 }

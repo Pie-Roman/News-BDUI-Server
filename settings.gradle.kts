@@ -4,6 +4,7 @@ include(":common:view")
 
 include(":feature:news-list-feature")
 include(":feature:tabs-feature")
+include(":feature:search-feature")
 
 include(":domain:article-domain")
 

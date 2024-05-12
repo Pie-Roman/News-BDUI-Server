@@ -18,6 +18,7 @@ dependencies {
     useCommonLibraries()
 
     useModule(ProjectModules.Feature.newsListFeature)
+    useModule(ProjectModules.Feature.searchFeature)
     useModule(ProjectModules.Feature.tabsFeature)
 }
 

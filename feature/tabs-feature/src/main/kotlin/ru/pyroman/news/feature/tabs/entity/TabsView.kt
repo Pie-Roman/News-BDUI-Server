@@ -18,7 +18,7 @@ import divkit.dsl.matchParentSize
 import divkit.dsl.overlap
 import divkit.dsl.scope.DivScope
 import divkit.dsl.solidBackground
-import divkit.dsl.space_between
+import divkit.dsl.space_around
 import divkit.dsl.state
 import divkit.dsl.stateItem
 import divkit.dsl.wrapContentSize
@@ -57,7 +57,7 @@ class TabsView(
             width = matchParentSize(),
             height = wrapContentSize(),
             orientation = horizontal,
-            contentAlignmentHorizontal = space_between,
+            contentAlignmentHorizontal = space_around,
             contentAlignmentVertical = center,
             background = listOf(solidBackground(color = color("#FFFFFF"))),
             paddings = edgeInsets(

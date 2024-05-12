@@ -21,6 +21,18 @@ fun DivScope.setStateAction(
     )
 }
 
+fun DivScope.setStateActionWithExpression(
+    logId: String,
+    stateId: String,
+    stateItemId: String,
+): Action {
+    return action(
+        logId = logId,
+    ).evaluate(
+        url = expression("div-action://set_state?state_id=0/$stateId/$stateItemId")
+    )
+}
+
 fun DivScope.setVariableAction(
     logId: String,
     variableName: String,

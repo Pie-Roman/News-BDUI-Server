@@ -18,6 +18,7 @@ internal class TabsFormatter {
 
         return TabsVo(
             tabs = tabs,
+            selectedTabId = TabsConstants.NEWS_LIST_TAB_ID,
         )
     }
 
@@ -26,6 +27,7 @@ internal class TabsFormatter {
         val tabContainerStateVo = formatNewsListTabContainerState()
 
         return TabVo(
+            id = TabsConstants.NEWS_LIST_TAB_ID,
             tabBarItemVo = tabBarItemVo,
             tabContainerStateVo = tabContainerStateVo,
         )
@@ -33,17 +35,14 @@ internal class TabsFormatter {
 
     private fun formatNewsListTabBarItem(): TabBarItemVo {
         val selectedState = TabBarItemStateVo(
-            id = TabsConstants.NEWS_LIST_TAB_BAR_ITEM_SELECTED_STATE_ID,
             imageUrl = Url.create(TabsConstants.NEWS_LIST_TAB_BAR_ITEM_SELECTED_IMAGE_URL),
         )
 
         val unselectedState = TabBarItemStateVo(
-            id = TabsConstants.NEWS_LIST_TAB_BAR_ITEM_UNSELECTED_STATE_ID,
             imageUrl = Url.create(TabsConstants.NEWS_LIST_TAB_BAR_ITEM_UNSELECTED_IMAGE_URL),
         )
 
         return TabBarItemVo(
-            id = TabsConstants.NEWS_LIST_TAB_BAR_ITEM_STATE_ID,
             selectedState = selectedState,
             unselectedState = unselectedState,
         )
@@ -65,6 +64,7 @@ internal class TabsFormatter {
         val tabContainerStateVo = formatSearchTabContainerState()
 
         return TabVo(
+            id = TabsConstants.SEARCH_TAB_ID,
             tabBarItemVo = tabBarItemVo,
             tabContainerStateVo = tabContainerStateVo,
         )
@@ -72,16 +72,13 @@ internal class TabsFormatter {
 
     private fun formatSearchTabBarItem(): TabBarItemVo {
         val selectedState = TabBarItemStateVo(
-            id = TabsConstants.SEARCH_TAB_BAR_ITEM_SELECTED_STATE_ID,
             imageUrl = Url.create(TabsConstants.SEARCH_TAB_BAR_ITEM_SELECTED_IMAGE_URL),
         )
         val unselectedState = TabBarItemStateVo(
-            id = TabsConstants.SEARCH_TAB_BAR_ITEM_UNSELECTED_STATE_ID,
             imageUrl = Url.create(TabsConstants.SEARCH_TAB_BAR_ITEM_UNSELECTED_IMAGE_URL),
         )
 
         return TabBarItemVo(
-            id = TabsConstants.SEARCH_TAB_BAR_ITEM_STATE_ID,
             selectedState = selectedState,
             unselectedState = unselectedState,
         )

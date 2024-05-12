@@ -1,10 +1,12 @@
 package ru.pyroman.news.feature.tabs.entity
 
 
+import divkit.dsl.Action
 import divkit.dsl.Container
 import divkit.dsl.Div
 import divkit.dsl.Image
 import divkit.dsl.Url
+import divkit.dsl.Variable
 import divkit.dsl.bottom
 import divkit.dsl.center
 import divkit.dsl.color
@@ -21,16 +23,29 @@ import divkit.dsl.solidBackground
 import divkit.dsl.space_around
 import divkit.dsl.state
 import divkit.dsl.stateItem
+import divkit.dsl.stringVariable
 import divkit.dsl.wrapContentSize
 import ru.pyroman.news.common.view.View
+import ru.pyroman.news.common.view.utils.setStateAction
+import ru.pyroman.news.common.view.utils.setStateActionWithExpression
+import ru.pyroman.news.common.view.utils.setVariableAction
 import ru.pyroman.news.common.view.utils.visibilityDownloadAction
 import ru.pyroman.news.feature.tabs.TabsConstants
+import ru.pyroman.news.feature.tabs.TabsConstants.SELECTED_TAB_ID_VARIABLE_NAME
 
 class TabsView(
     val vo: TabsVo,
 ) : View() {
 
     override val layoutId = TabsConstants.TABS_LAYOUT_ID
+
+    override val DivScope.variables: List<Variable>
+        get() = listOf(
+            stringVariable(
+                name = SELECTED_TAB_ID_VARIABLE_NAME,
+                value = vo.selectedTabId,
+            ),
+        )
 
     override fun DivScope.layout(): Div {
         return tabsView(
@@ -65,37 +80,49 @@ class TabsView(
                 right = 16,
             ),
             items = tabsVo.tabs.map { tabVo ->
-                tabsBarItem(tabVo.tabBarItemVo)
+                tabsBarItem(tabVo)
             },
         )
     }
 
-    private fun DivScope.tabsBarItem(vo: TabBarItemVo): Div {
-        return state(
-            id = vo.id,
+    private fun DivScope.tabsBarItem(vo: TabVo): Div {
+        val id = vo.id
+        val tabBarItemVo = vo.tabBarItemVo
+
+        return container(
             width = wrapContentSize(),
             height = wrapContentSize(),
-            states = listOf(
-                stateItem(
-                    stateId = vo.selectedState.id,
-                    div = tabsBarItemImage(vo.selectedState.imageUrl)
+            actions = switchTabActions(id),
+            items = listOf(
+                state(
+                    id = id.tabBarItemStateId,
+                    width = wrapContentSize(),
+                    height = wrapContentSize(),
+                    states = listOf(
+                        stateItem(
+                            stateId = id.tabBarItemUnselectedStateId,
+                            div = tabsBarItemImage(tabBarItemVo.unselectedState.imageUrl),
+                        ),
+                        stateItem(
+                            stateId = id.tabBarItemSelectedStateId,
+                            div = tabsBarItemImage(tabBarItemVo.selectedState.imageUrl)
+                        ),
+                    ),
                 ),
-                stateItem(
-                    stateId = vo.unselectedState.id,
-                    div = tabsBarItemImage(vo.unselectedState.imageUrl),
-                ),
-            ),
+            )
         )
     }
 
-    private fun DivScope.tabsBarItemImage(imageUrl: Url): Image {
+    private fun DivScope.tabsBarItemImage(
+        imageUrl: Url,
+    ): Image {
         return image(
             width = fixedSize(24),
             height = fixedSize(24),
             imageUrl = imageUrl,
             margins = edgeInsets(
                 all = 16,
-            )
+            ),
         )
     }
 
@@ -108,7 +135,7 @@ class TabsView(
                     stateId = tabVo.tabContainerStateVo.stateId,
                     div = tab(tabVo.tabContainerStateVo),
                 )
-            }
+            },
         )
     }
 
@@ -123,6 +150,34 @@ class TabsView(
                     url = tabContainerStateVo.downloadUrl,
                 )
             ),
+        )
+    }
+
+    private fun DivScope.switchTabActions(newTabId: String): List<Action> {
+        return listOf(
+            unselectTabAction(),
+            setVariableAction(
+                logId = "$SELECTED_TAB_ID_VARIABLE_NAME$newTabId",
+                variableName = SELECTED_TAB_ID_VARIABLE_NAME,
+                value = newTabId,
+            ),
+            selectTabStateAction(newTabId),
+        )
+    }
+
+    private fun DivScope.unselectTabAction(): Action {
+        return setStateActionWithExpression(
+            logId = "${SELECTED_TAB_ID_VARIABLE_NAME}_unselect_state",
+            stateId = "@{$SELECTED_TAB_ID_VARIABLE_NAME}".tabBarItemStateId,
+            stateItemId = "@{$SELECTED_TAB_ID_VARIABLE_NAME}".tabBarItemUnselectedStateId,
+        )
+    }
+
+    private fun DivScope.selectTabStateAction(tabId: String): Action {
+        return setStateAction(
+            logId = "${tabId}_select_state",
+            stateId = tabId.tabBarItemStateId,
+            stateItemId = tabId.tabBarItemSelectedStateId,
         )
     }
 }

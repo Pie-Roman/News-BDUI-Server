@@ -1,6 +1,8 @@
 package ru.pyroman.news.common.view
 
 import divkit.dsl.Div
+import divkit.dsl.Trigger
+import divkit.dsl.Variable
 import divkit.dsl.data
 import divkit.dsl.divan
 import divkit.dsl.divanPatch
@@ -14,6 +16,12 @@ abstract class View {
     abstract val layoutId: String
 
     abstract fun DivScope.layout(): Div
+
+    open val DivScope.variableTriggers: List<Trigger>
+        get() = emptyList()
+
+    open val DivScope.variables: List<Variable>
+        get() = emptyList()
 
     fun getPatchData(id: String): ViewPatchData {
         val divanPatch = divanPatch {
@@ -40,7 +48,9 @@ abstract class View {
                 logId = layoutId,
                 states = singleRoot(
                     div = layout(),
-                )
+                ),
+                variableTriggers = variableTriggers,
+                variables = variables,
             )
         }
 

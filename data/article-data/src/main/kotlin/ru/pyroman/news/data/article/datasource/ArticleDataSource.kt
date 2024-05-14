@@ -21,13 +21,18 @@ internal class ArticleDataSource {
 
         val webClient = WebClient.builder().build()
 
-        val response = webClient
-            .get()
-            .uri(uri)
-            .retrieve()
-            .bodyToMono(ArticleListDto::class.java)
-            .block()
-
-        return requireNotNull(response)
+        return try {
+            val response = webClient
+                .get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(ArticleListDto::class.java)
+                .block()
+            requireNotNull(response)
+        } catch (error: Throwable) {
+            ArticleListDto(
+                results = emptyList(),
+            )
+        }
     }
 }

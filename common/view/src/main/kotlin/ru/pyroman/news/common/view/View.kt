@@ -17,10 +17,12 @@ abstract class View {
 
     abstract fun DivScope.layout(): Div
 
-    open val DivScope.variableTriggers: List<Trigger>
+    context(DivScope)
+    open val variableTriggers: List<Trigger>
         get() = emptyList()
 
-    open val DivScope.variables: List<Variable>
+    context(DivScope)
+    open val variables: List<Variable>
         get() = emptyList()
 
     fun getPatchData(id: String): ViewPatchData {

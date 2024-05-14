@@ -38,7 +38,8 @@ class TabsView(
 
     override val layoutId = TabsConstants.TABS_LAYOUT_ID
 
-    override val DivScope.variables: List<Variable>
+    context (DivScope)
+    override val variables: List<Variable>
         get() = listOf(
             stringVariable(
                 name = SELECTED_TAB_ID_VARIABLE_NAME,

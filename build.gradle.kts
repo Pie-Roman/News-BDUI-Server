@@ -22,9 +22,12 @@ dependencies {
     useModule(ProjectModules.Feature.tabsFeature)
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "17"
+allprojects {
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "17"
+            freeCompilerArgs += "-Xcontext-receivers"
+        }
     }
 }
 

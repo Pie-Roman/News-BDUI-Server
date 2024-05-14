@@ -18,12 +18,16 @@ dependencies {
     useCommonLibraries()
 
     useModule(ProjectModules.Feature.newsListFeature)
+    useModule(ProjectModules.Feature.searchFeature)
     useModule(ProjectModules.Feature.tabsFeature)
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "17"
+allprojects {
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "17"
+            freeCompilerArgs += "-Xcontext-receivers"
+        }
     }
 }
 

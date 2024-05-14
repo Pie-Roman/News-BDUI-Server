@@ -29,7 +29,7 @@ class SearchView : View() {
         get() = listOf(
             stringVariable(
                 name = SEARCH_INPUT_VARIABLE_NAME,
-                value = "",
+                value = "example",
             )
         )
 

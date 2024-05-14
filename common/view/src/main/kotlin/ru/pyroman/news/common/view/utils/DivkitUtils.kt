@@ -52,7 +52,7 @@ fun DivScope.visibilityDownloadAction(
 ): VisibilityAction {
     return visibilityAction(
         logId = logId,
-        url = makeDownloadUrl(url),
+        url = url(makeDownloadUrl(url.toString())),
         logLimit = logLimit,
     )
 }
@@ -63,8 +63,19 @@ fun DivScope.downloadAction(
 ): Action {
     return action(
         logId = logId,
-        url = makeDownloadUrl(url),
+        url = url(makeDownloadUrl(url.toString())),
     )
 }
 
-private fun DivScope.makeDownloadUrl(url: Url) = url("div-action://download?url=$url")
+private fun DivScope.makeDownloadUrl(url: String) = "div-action://download?url=$url"
+
+fun DivScope.downloadActionWithExpression(
+    logId: String,
+    urlExpression: String,
+): Action {
+    return action(
+        logId = logId,
+    ).evaluate(
+        url = expression(makeDownloadUrl(urlExpression)),
+    )
+}

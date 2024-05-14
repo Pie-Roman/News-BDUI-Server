@@ -1,4 +1,4 @@
-package ru.pyroman.news.feature.newslist.entity
+package ru.pyroman.news.feature.newscard.entity
 
 import divkit.dsl.Url
 

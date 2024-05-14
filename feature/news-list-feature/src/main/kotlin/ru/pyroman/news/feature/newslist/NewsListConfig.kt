@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import ru.pyroman.news.data.article.ArticleDataConfig
+import ru.pyroman.news.feature.newscard.NewsCardConfig
 import ru.pyroman.news.feature.newslist.controller.NewsListController
 import ru.pyroman.news.feature.newslist.formatter.NewsListFormatter
 import ru.pyroman.news.feature.newslist.repository.NewsListRepository
@@ -15,16 +16,20 @@ import ru.pyroman.news.feature.newslist.service.NewsListServiceImpl
 @Configuration
 @Import(
     value = [
-        ArticleDataConfig::class
+        ArticleDataConfig::class,
+        NewsCardConfig::class,
     ]
 )
 class NewsListConfig(
-    @Autowired private val articleDataConfig: ArticleDataConfig
+    @Autowired private val articleDataConfig: ArticleDataConfig,
+    @Autowired private val newsCardConfig: NewsCardConfig,
 ) {
 
     @Bean("newsListFormatter")
     internal fun provideNewsListFormatter(): NewsListFormatter {
-        return NewsListFormatter()
+        return NewsListFormatter(
+            newsCardFormatter = newsCardConfig.provideNewsCardFormatter(),
+        )
     }
 
     @Bean("newsListRepository")

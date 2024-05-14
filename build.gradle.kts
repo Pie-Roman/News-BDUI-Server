@@ -19,6 +19,7 @@ dependencies {
 
     useModule(ProjectModules.Feature.newsListFeature)
     useModule(ProjectModules.Feature.searchFeature)
+    useModule(ProjectModules.Feature.searchResultFeature)
     useModule(ProjectModules.Feature.tabsFeature)
 }
 

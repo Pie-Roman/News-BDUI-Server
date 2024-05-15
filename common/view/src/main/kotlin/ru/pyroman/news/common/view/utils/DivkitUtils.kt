@@ -40,8 +40,20 @@ fun DivScope.setVariableAction(
 ): Action {
     return action(
         logId = logId,
-    ).evaluate(
-        url = expression("div-action://set_variable?name=$variableName&value=$value")
+        url = url("div-action://set_variable?name=$variableName&value=$value")
+    )
+}
+
+fun DivScope.setVariableVisibilityAction(
+    logId: String,
+    variableName: String,
+    value: Any,
+    logLimit: Int? = 0,
+): VisibilityAction {
+    return visibilityAction(
+        logId = logId,
+        url = url("div-action://set_variable?name=$variableName&value=$value"),
+        logLimit = logLimit,
     )
 }
 
@@ -52,8 +64,21 @@ fun DivScope.visibilityDownloadAction(
 ): VisibilityAction {
     return visibilityAction(
         logId = logId,
-        url = makeDownloadUrl(url),
+        url = url(makeDownloadUrl(url.toString())),
         logLimit = logLimit,
+    )
+}
+
+fun DivScope.visibilityDownloadActionWithExpression(
+    logId: String,
+    urlExpression: String,
+    logLimit: Int? = 0,
+): VisibilityAction {
+    return visibilityAction(
+        logId = logId,
+        logLimit = logLimit,
+    ).evaluate(
+        url = expression(makeDownloadUrl(urlExpression)),
     )
 }
 
@@ -63,8 +88,19 @@ fun DivScope.downloadAction(
 ): Action {
     return action(
         logId = logId,
-        url = makeDownloadUrl(url),
+        url = url(makeDownloadUrl(url.toString())),
     )
 }
 
-private fun DivScope.makeDownloadUrl(url: Url) = url("div-action://download?url=$url")
+private fun makeDownloadUrl(url: String) = "div-action://download?url=$url"
+
+fun DivScope.downloadActionWithExpression(
+    logId: String,
+    urlExpression: String,
+): Action {
+    return action(
+        logId = logId,
+    ).evaluate(
+        url = expression(makeDownloadUrl(urlExpression)),
+    )
+}

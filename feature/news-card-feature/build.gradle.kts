@@ -16,7 +16,4 @@ dependencies {
     useCommonFeatureModules()
 
     useModule(ProjectModules.Domain.articleDomain)
-    useModule(ProjectModules.Data.articleData)
-
-    useModule(ProjectModules.Feature.newsCardFeature)
 }

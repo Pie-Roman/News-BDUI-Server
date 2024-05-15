@@ -33,8 +33,10 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/article-domain" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/news-card-feature" />
             <option value="$PROJECT_DIR$/feature/news-list-feature" />
             <option value="$PROJECT_DIR$/feature/search-feature" />
+            <option value="$PROJECT_DIR$/feature/search-result-feature" />
             <option value="$PROJECT_DIR$/feature/tabs-feature" />
           </set>
         </option>

@@ -1,4 +1,5 @@
 package ru.pyroman.news.domain.article.model
 
-class ArticlesRequest {
-}
+class ArticlesRequest(
+    val query: String? = null,
+)

@@ -20,6 +20,7 @@ import divkit.dsl.wrapContentSize
 import ru.pyroman.news.common.view.View
 import ru.pyroman.news.common.view.utils.setVariableVisibilityAction
 import ru.pyroman.news.common.view.utils.visibilityDownloadActionWithExpression
+import ru.pyroman.news.feature.search.SearchConstants.KEY_SEARCH_INPUT_TRIGGERED_VARIABLE_NAME
 import ru.pyroman.news.feature.search.SearchConstants.KEY_SEARCH_INPUT_VARIABLE_NAME
 import ru.pyroman.news.feature.search.SearchConstants.PATCH_SEARCH_RESULT_VISIBILITY_ACTION_ID
 import ru.pyroman.news.feature.search.SearchConstants.SEARCH_INPUT_TRIGGERED_VARIABLE_NAME
@@ -53,7 +54,8 @@ class SearchView : View() {
                         bottom = 30,
                     ),
                     customProps = mapOf(
-                        KEY_SEARCH_INPUT_VARIABLE_NAME to SEARCH_INPUT_VARIABLE_NAME
+                        KEY_SEARCH_INPUT_VARIABLE_NAME to SEARCH_INPUT_VARIABLE_NAME,
+                        KEY_SEARCH_INPUT_TRIGGERED_VARIABLE_NAME to SEARCH_INPUT_TRIGGERED_VARIABLE_NAME,
                     )
                 ),
                 searchTriggerView(),

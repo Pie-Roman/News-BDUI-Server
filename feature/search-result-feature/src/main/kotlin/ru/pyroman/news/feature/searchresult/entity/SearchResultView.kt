@@ -21,6 +21,7 @@ internal class SearchResultView(
 
     private fun DivScope.searchResultView(vo: SearchResultVo): Div {
         return gallery(
+            id = "searchResultContainerLayout",
             orientation = vertical,
             width = matchParentSize(),
             height = matchParentSize(),

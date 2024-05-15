@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import ru.pyroman.news.data.article.ArticleDataConfig
 import ru.pyroman.news.feature.newscard.NewsCardConfig
-import ru.pyroman.news.feature.searchResultresult.controller.SearchResultController
+import ru.pyroman.news.feature.searchresult.controller.SearchResultController
 import ru.pyroman.news.feature.searchresult.formatter.SearchResultFormatter
 import ru.pyroman.news.feature.searchresult.repository.SearchResultRepository
 import ru.pyroman.news.feature.searchresult.repository.SearchResultRepositoryImpl

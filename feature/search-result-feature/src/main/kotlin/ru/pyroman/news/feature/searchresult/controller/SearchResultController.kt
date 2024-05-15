@@ -1,4 +1,4 @@
-package ru.pyroman.news.feature.searchResultresult.controller
+package ru.pyroman.news.feature.searchresult.controller
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -13,9 +13,8 @@ class SearchResultController(
 
     @GetMapping("/patch/search-result")
     fun getViewPatchData(
-        @RequestParam("id") id: String,
         @RequestParam("searchInput") searchInput: String,
     ): ViewPatchData {
-        return searchResultService.getView(searchInput).getPatchData(id)
+        return searchResultService.getView(searchInput).getPatchData("searchResultContainerLayout")
     }
 }

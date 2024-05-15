@@ -14,4 +14,6 @@ java {
 dependencies {
     useCommonFeatureLibraries()
     useCommonFeatureModules()
+
+    useModule(ProjectModules.Feature.searchResultFeature)
 }

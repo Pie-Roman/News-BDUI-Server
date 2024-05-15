@@ -18,16 +18,16 @@ internal class SearchResultView(
     override fun DivScope.layout(): Div {
         return searchResultView(vo = vo)
     }
+}
 
-    private fun DivScope.searchResultView(vo: SearchResultVo): Div {
-        return gallery(
-            id = "searchResultContainerLayout",
-            orientation = vertical,
-            width = matchParentSize(),
-            height = matchParentSize(),
-            items = vo.items.map { newsVo ->
-                newsCard(vo = newsVo)
-            },
-        )
-    }
+fun DivScope.searchResultView(vo: SearchResultVo): Div {
+    return gallery(
+        id = SearchResultConstants.SEARCH_RESULT_CONTAINER_LAYOUT_ID,
+        orientation = vertical,
+        width = matchParentSize(),
+        height = matchParentSize(),
+        items = vo.items.map { newsVo ->
+            newsCard(vo = newsVo)
+        },
+    )
 }
